@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EX01 DCC104</title>
+  </head>
+  <body>
+    <h1>EX01 DCC104</h1>
+    <canvas width="480" height="320">
+      Seu navegador está desatulizado!
+    </canvas>
+
+    <script>
+    var tela = document.getElementsByTagName("canvas")[0];
+    var ctx = tela.getContext("2d");
+    var anterior = 0;
+    var dt = 0;
+
+    var x = 150;
+    var y = 150;
+    var w = h = 20;
+    var vx = 0;
+    var vy = 0;
+
+    function limpaTela(){
+      ctx.fillStyle = "black";
+      ctx.fillRect( 0,0, tela.width, tela.height);
+    }
+
+    function desenhaQuadrado(){
+      ctx.fillStyle = "gray";
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 3;
+      ctx.fillRect(x, y, w, h);
+      ctx.strokeRect(x, y, w, h);
+    }
+
+    function moveQuadrado(){
+      x = x + vx*dt;
+      y = y + vy*dt;
+    }
+
+    function passo(t){
+      dt = (t - anterior)/1000;
+      //console.log(dt, t);
+      moveQuadrado();
+      limpaTela();
+      desenhaQuadrado();
+      requestAnimationFrame(passo);
+      anterior = t;
+    }
+
+    requestAnimationFrame(passo);
+    addEventListener("keydown", function(e){
+      //console.log(e.keyCode);
+      switch(e.keyCode){
+        case 39:
+          vx = 35;
+          e.preventDefault();
+        break;
+        vx = 0;
+        case 37:
+          vx = -35;
+          e.preventDefault();
+        break;
+        case 38:
+          vy = -35;
+          e.preventDefault();
+        break;
+        case 40:
+          vy = 35;
+          e.preventDefault();
+        break;
+      }
+    });
+    addEventListener("keyup", function(e){
+      //console.log(e.keyCode);
+      if(e.keyCode === 39 || e.keyCode === 37) {
+        vx = 0;
+        e.preventDefault();
+      } else if (e.keyCode === 38 || e.keyCode === 40) {
+        vy = 0;
+        e.preventDefault();
+      }
+    });
+
+    </script>
+  </body>
+</html>
