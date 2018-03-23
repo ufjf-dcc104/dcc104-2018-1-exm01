@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exemplo 02</title>
+  </head>
+  <body>
+    <h1>Exemplo 02</h1>
+    <canvas width="480" height="320">
+    Seu browser não suporta canvas!</canvas>
+    <script>
+    var tela = document.getElementsByTagName("canvas")[0];
+    var ctx = tela.getContext("2d");
+
+    var dt = anterior = 0;
+
+    function limparTela() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0,0, tela.width, tela.height);
+    }
+
+    function passo(t) {
+      dt = (t - anterior)/1000;
+      limparTela();
+
+      anterior = t;
+      requestAnimationFrame(passo);
+    }
+
+    requestAnimationFrame(passo);
+
+    </script>
+  </body>
+</html>
