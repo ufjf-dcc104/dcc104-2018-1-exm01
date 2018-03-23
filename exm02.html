@@ -48,6 +48,37 @@
 
     requestAnimationFrame(passo);
 
+    addEventListener("keydown", function(e){
+      switch (e.keyCode) {
+        case 37:
+          pc.ax = -100;
+          break;
+        case 39:
+          pc.ax = +100;
+          break;
+        case 38:
+          pc.ay = -100;
+          break;100
+        case 40:
+          pc.ay = +100;
+          break;
+        default:
+      }
+    });
+    addEventListener("keyup", function(e){
+      switch (e.keyCode) {
+        case 37:
+        case 39:
+          pc.ax = 0;
+          break;
+        case 38:
+        case 40:
+          pc.ay = 0;
+          break;
+        default:
+      }
+    });
+
     </script>
   </body>
 </html>
