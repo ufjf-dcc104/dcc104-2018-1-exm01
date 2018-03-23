@@ -14,7 +14,18 @@
     var ctx = tela.getContext("2d");
 
     var dt = anterior = 0;
+    var sprites = [];
     var pc = new Sprite();
+    sprites.push(pc);
+
+    for( var e = 0; e < 3; e++){
+      var enemy = new Sprite();
+      enemy.x = 200;
+      enemy.y = 100;
+      enemy.vx = 20-40*Math.random();
+      enemy.vy = 20-40*Math.random();
+      sprites.push(enemy);
+    }
 
     function limparTela() {
       ctx.fillStyle = "black";
@@ -23,10 +34,14 @@
 
     function passo(t) {
       dt = (t - anterior)/1000;
-      pc.mover(dt);
+      for (var i = 0; i < sprites.length; i++) {
+        sprites[i].mover(dt);
+      }
 
       limparTela();
-      pc.desenhar(ctx);
+      for (var i = 0; i < sprites.length; i++) {
+        sprites[i].desenhar(ctx);
+      }
       anterior = t;
       requestAnimationFrame(passo);
     }
