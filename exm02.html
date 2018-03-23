@@ -20,10 +20,8 @@
 
     for( var e = 0; e < 3; e++){
       var enemy = new Sprite();
-      enemy.x = 200;
-      enemy.y = 100;
-      enemy.ax = 20-40*Math.random();
-      enemy.ay = 20-40*Math.random();
+      enemy.x = 200-400*Math.random();
+      enemy.y = 100-200*Math.random();
       sprites.push(enemy);
     }
 
@@ -35,6 +33,9 @@
     function passo(t) {
       dt = (t - anterior)/1000;
       for (var i = 0; i < sprites.length; i++) {
+        if(i>0) {
+          sprites[i].perseguir(pc);
+        }
         sprites[i].mover(dt);
       }
 
