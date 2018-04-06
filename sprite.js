@@ -7,10 +7,11 @@ function Sprite() {
   this.vy = 0;
   this.ax = 0;
   this.ay = 0;
+  this.cor = "grey";
 }
 
 Sprite.prototype.desenhar = function (ctx) {
-  ctx.fillStyle = "grey";
+  ctx.fillStyle = this.cor;
   ctx.strokeStyle = "white";
   ctx.lineWidth = 3;
   ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -48,4 +49,12 @@ Sprite.prototype.impoeLimites = function(x, y, w, h){
     this.vy = 0;
   }
 
-}
+};
+
+Sprite.prototype.colidiuCom = function (alvo) {
+  if(alvo.x+alvo.w < this.x) return false;
+  if(alvo.x > this.x+this.w) return false;
+  if(alvo.y+alvo.h < this.y) return false;
+  if(alvo.y > this.y+this.h) return false;
+  return true;
+};
