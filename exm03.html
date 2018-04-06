@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exemplo 03</title>
+    <script src="sprite.js"></script>
+  </head>
+  <body>
+    <h1>Exemplo 03</h1>
+    <canvas width="480" height="320">
+    Seu browser não suporta canvas!</canvas>
+    <script>
+    var tela = document.getElementsByTagName("canvas")[0];
+    var ctx = tela.getContext("2d");
+
+    var dt = anterior = 0;
+    var sprites = [];
+    var pc = new Sprite();
+    sprites.push(pc);
+
+    for( var e = 0; e < 3; e++){
+      var enemy = new Sprite();
+      enemy.x = 200-400*Math.random();
+      enemy.y = 100-200*Math.random();
+      sprites.push(enemy);
+    }
+
+    function limparTela() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0,0, tela.width, tela.height);
+    }
+
+    function passo(t) {
+      dt = (t - anterior)/1000;
+      for (var i = 0; i < sprites.length; i++) {
+        if(i>0) {
+          sprites[i].perseguir(pc);
+        }
+        sprites[i].mover(dt);
+      }
+
+      limparTela();
+      for (var i = 0; i < sprites.length; i++) {
+        sprites[i].desenhar(ctx);
+      }
+      anterior = t;
+      requestAnimationFrame(passo);
+    }
+
+    requestAnimationFrame(passo);
+
+    addEventListener("keydown", function(e){
+      switch (e.keyCode) {
+        case 37:
+          pc.ax = -100;
+          break;
+        case 39:
+          pc.ax = +100;
+          break;
+        case 38:
+          pc.ay = -100;
+          break;100
+        case 40:
+          pc.ay = +100;
+          break;
+        default:
+      }
+    });
+    addEventListener("keyup", function(e){
+      switch (e.keyCode) {
+        case 37:
+        case 39:
+          pc.ax = 0;
+          break;
+        case 38:
+        case 40:
+          pc.ay = 0;
+          break;
+        default:
+      }
+    });
+
+    </script>
+  </body>
+</html>
