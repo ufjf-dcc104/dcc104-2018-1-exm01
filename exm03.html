@@ -12,6 +12,7 @@
     <script>
     var tela = document.getElementsByTagName("canvas")[0];
     var ctx = tela.getContext("2d");
+    var G = 200;
 
     var dt = anterior = 0;
     var sprites = [];
@@ -69,8 +70,8 @@
           pc.ax = +100;
           break;
         case 38:
-          pc.ay = -100;
-          break;100
+          pc.vy = pc.vy-200;
+          break;
         case 40:
           pc.ay = +100;
           break;

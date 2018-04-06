@@ -26,7 +26,7 @@ Sprite.prototype.desenhar = function (ctx) {
 
 Sprite.prototype.mover = function (dt) {
     this.vx = this.vx + this.ax*dt;
-    this.vy = this.vy + this.ay*dt;
+    this.vy = this.vy + (G+this.ay)*dt;
 
     this.x = this.x + this.vx*dt;
     this.y = this.y + this.vy*dt;
@@ -37,6 +37,7 @@ Sprite.prototype.mover = function (dt) {
 Sprite.prototype.perseguir = function (alvo){
   this.ax = 0.5*(alvo.x - this.x) - 0.9*this.vx;
   this.ay = 0.5*(alvo.y - this.y) - 0.9*this.vy;
+  if(this.y > alvo.y) this.vy -= 100;
 }
 
 Sprite.prototype.impoeLimites = function(x, y, w, h){
