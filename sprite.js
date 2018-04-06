@@ -8,11 +8,17 @@ function Sprite() {
   this.ax = 0;
   this.ay = 0;
   this.cor = "grey";
+  this.imunidade = 0;
 }
 
 Sprite.prototype.desenhar = function (ctx) {
-  ctx.fillStyle = this.cor;
-  ctx.strokeStyle = "white";
+  if(this.imunidade > 0){
+    ctx.fillStyle = 'rgba(255, 255, 0, '+Math.cos(20*Math.PI*this.imunidade)+')';
+    ctx.strokeStyle = 'hsla(255,255,255, 0.3)';
+  } else {
+    ctx.fillStyle = this.cor;
+    ctx.strokeStyle = 'white';
+  }
   ctx.lineWidth = 3;
   ctx.fillRect(this.x, this.y, this.w, this.h);
   ctx.strokeRect(this.x, this.y, this.w, this.h);
@@ -24,6 +30,8 @@ Sprite.prototype.mover = function (dt) {
 
     this.x = this.x + this.vx*dt;
     this.y = this.y + this.vy*dt;
+
+    this.imunidade = this.imunidade - 1*dt;
 }
 
 Sprite.prototype.perseguir = function (alvo){
