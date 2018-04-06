@@ -43,7 +43,7 @@ Sprite.prototype.impoeLimites = function(x, y, w, h){
     this.y = y;
     this.vy = 0;
   }
-  if(this.y + this.w > y + h) {
+  if(this.y + this.h > y + h) {
     this.y = y + h - this.h;
     this.vy = 0;
   }
