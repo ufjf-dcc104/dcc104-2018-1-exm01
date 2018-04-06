@@ -29,3 +29,15 @@ Sprite.prototype.perseguir = function (alvo){
   this.ax = 0.5*(alvo.x - this.x) - 0.9*this.vx;
   this.ay = 0.5*(alvo.y - this.y) - 0.9*this.vy;
 }
+
+Sprite.prototype.impoeLimites = function(x, y, w, h){
+  if(this.x < x ) {
+    this.x = 0;
+    this.vx = 0;
+  }
+  if(this.x + this.w > x + w) {
+    this.x = x + w - this.w;
+    this.vx = 0;
+  }
+
+}
