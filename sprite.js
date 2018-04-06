@@ -32,7 +32,7 @@ Sprite.prototype.perseguir = function (alvo){
 
 Sprite.prototype.impoeLimites = function(x, y, w, h){
   if(this.x < x ) {
-    this.x = 0;
+    this.x = x;
     this.vx = 0;
   }
   if(this.x + this.w > x + w) {
