@@ -8,6 +8,7 @@ function Sprite() {
   this.ax = 0;
   this.ay = 0;
   this.ang = 0;
+  this.vang = 0;
   this.cor = "grey";
   this.imunidade = 0;
 }
@@ -30,11 +31,14 @@ Sprite.prototype.desenhar = function (ctx) {
 }
 
 Sprite.prototype.mover = function (dt) {
+    this.ang = this.ang + this.vang*dt;
+
     this.vx = this.vx + this.ax*dt;
     this.vy = this.vy + (G+this.ay)*dt;
 
     this.x = this.x + this.vx*dt;
     this.y = this.y + this.vy*dt;
+
  
     this.imunidade = this.imunidade - 1*dt;
 }

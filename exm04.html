@@ -64,10 +64,10 @@
     addEventListener("keydown", function(e){
       switch (e.keyCode) {
         case 37:
-          pc.ax = -100;
+          pc.vang = -0.07;
           break;
         case 39:
-          pc.ax = +100;
+          pc.vang = +0.07;
           break;
         case 38:
           pc.ay = -200;
@@ -82,7 +82,7 @@
       switch (e.keyCode) {
         case 37:
         case 39:
-          pc.ax = 0;
+          pc.vang = 0;
           break;
         case 38:
         case 40:
