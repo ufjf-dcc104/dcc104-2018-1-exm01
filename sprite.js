@@ -9,6 +9,7 @@ function Sprite() {
   this.ay = 0;
   this.ang = 0;
   this.vang = 0;
+  this.acel = 0;
   this.cor = "grey";
   this.imunidade = 0;
 }
@@ -24,7 +25,7 @@ Sprite.prototype.desenhar = function (ctx) {
   ctx.lineWidth = 3;
   ctx.save();
   ctx.translate(this.x, this.y);
-  ctx.rotate(this.ang*180/Math.PI);
+  ctx.rotate(this.ang*Math.PI/180);
   ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
   ctx.strokeRect(-this.w/2, -this.h/2, this.w, this.h);
   ctx.restore();
@@ -32,6 +33,22 @@ Sprite.prototype.desenhar = function (ctx) {
 
 Sprite.prototype.mover = function (dt) {
     this.ang = this.ang + this.vang*dt;
+
+    this.vx = this.vx + this.ax*dt;
+    this.vy = this.vy + (G+this.ay)*dt;
+
+    this.x = this.x + this.vx*dt;
+    this.y = this.y + this.vy*dt;
+
+ 
+    this.imunidade = this.imunidade - 1*dt;
+}
+
+Sprite.prototype.moverAng = function (dt) {
+    this.ang = this.ang + this.vang*dt;
+
+    this.ax = this.acel*Math.cos(this.ang*Math.PI/180);
+    this.ay = this.acel*Math.sin(this.ang*Math.PI/180);
 
     this.vx = this.vx + this.ax*dt;
     this.vy = this.vy + (G+this.ay)*dt;

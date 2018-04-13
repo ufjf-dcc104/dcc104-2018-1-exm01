@@ -37,7 +37,7 @@
         if(i>0) {
           //sprites[i].perseguir(pc);
         }
-        sprites[i].mover(dt);
+        sprites[i].moverAng(dt);
         sprites[i].impoeLimites(0,0, tela.width, tela.height);
         if(i > 0 && pc.imunidade <=0 && pc.colidiuCom(sprites[i])){
           pc.cor = 'red';
@@ -64,16 +64,16 @@
     addEventListener("keydown", function(e){
       switch (e.keyCode) {
         case 37:
-          pc.vang = -0.07;
+          pc.vang = -45;
           break;
         case 39:
-          pc.vang = +0.07;
+          pc.vang = 45;
           break;
         case 38:
-          pc.ay = -200;
+          pc.acel = 200;
           break;
         case 40:
-          pc.ay = +100;
+          pc.acel = -200;
           break;m
         default:
       }
@@ -86,7 +86,7 @@
           break;
         case 38:
         case 40:
-          pc.ay = 0;
+          pc.acel = 0;
           break;
         default:
       }
