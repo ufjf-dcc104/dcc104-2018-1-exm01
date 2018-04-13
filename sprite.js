@@ -25,9 +25,22 @@ Sprite.prototype.desenhar = function (ctx) {
   ctx.lineWidth = 3;
   ctx.save();
   ctx.translate(this.x, this.y);
+  ctx.save();
   ctx.rotate(this.ang*Math.PI/180);
-  ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
-  ctx.strokeRect(-this.w/2, -this.h/2, this.w, this.h);
+  ctx.beginPath();
+  ctx.moveTo(-this.w/2, -this.h/2);
+  ctx.lineTo(-this.w/2, +this.h/2);
+  ctx.lineTo(+this.w/2+10,  0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  if(this.debug){
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(-this.w/2, -this.h/2, this.w, this.h);
+  //ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
+  }
   ctx.restore();
 }
 
