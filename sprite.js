@@ -20,8 +20,11 @@ Sprite.prototype.desenhar = function (ctx) {
     ctx.strokeStyle = 'white';
   }
   ctx.lineWidth = 3;
-  ctx.fillRect(this.x, this.y, this.w, this.h);
-  ctx.strokeRect(this.x, this.y, this.w, this.h);
+  ctx.save();
+  ctx.translate(this.x, this.y);
+  ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
+  ctx.strokeRect(-this.w/2, -this.h/2, this.w, this.h);
+  ctx.restore();
 }
 
 Sprite.prototype.mover = function (dt) {
@@ -30,7 +33,7 @@ Sprite.prototype.mover = function (dt) {
 
     this.x = this.x + this.vx*dt;
     this.y = this.y + this.vy*dt;
-
+ 
     this.imunidade = this.imunidade - 1*dt;
 }
 
