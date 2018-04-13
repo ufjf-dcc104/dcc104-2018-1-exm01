@@ -7,6 +7,7 @@ function Sprite() {
   this.vy = 0;
   this.ax = 0;
   this.ay = 0;
+  this.ang = 0;
   this.cor = "grey";
   this.imunidade = 0;
 }
@@ -22,6 +23,7 @@ Sprite.prototype.desenhar = function (ctx) {
   ctx.lineWidth = 3;
   ctx.save();
   ctx.translate(this.x, this.y);
+  ctx.rotate(this.ang*180/Math.PI);
   ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
   ctx.strokeRect(-this.w/2, -this.h/2, this.w, this.h);
   ctx.restore();
@@ -43,20 +45,20 @@ Sprite.prototype.perseguir = function (alvo){
 }
 
 Sprite.prototype.impoeLimites = function(x, y, w, h){
-  if(this.x < x ) {
-    this.x = x;
+  if(this.x - this.w/2< x ) {
+    this.x = x + this.w/2;
     this.vx = 0;
   }
-  if(this.x + this.w > x + w) {
-    this.x = x + w - this.w;
+  if(this.x + this.w/2 > x + w) {
+    this.x = x + w - this.w/2;
     this.vx = 0;
   }
-  if(this.y < y ) {
-    this.y = y;
+  if(this.y - this.h/2 < y ) {
+    this.y = y + this.h/2;
     this.vy = 0;
   }
-  if(this.y + this.h > y + h) {
-    this.y = y + h - this.h;
+  if(this.y + this.h/2 > y + h) {
+    this.y = y + h - this.h/2;
     this.vy = 0;
   }
 
