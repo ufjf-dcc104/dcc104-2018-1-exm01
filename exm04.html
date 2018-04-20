@@ -17,6 +17,7 @@
     var dt = anterior = 0;
     var sprites = [];
     var pc = new Sprite();
+    pc.cdTiro = 0;
     sprites.push(pc);
 
     for( var e = 0; e < 3; e++){
@@ -38,8 +39,11 @@
           //sprites[i].perseguir(pc);
         }
         sprites[i].moverAng(dt);
+        console.log(dt)
+        pc.cdTiro = pc.cdTiro-dt;
+        if(pc.cdTiro<0) pc.cdTiro = 0;
         sprites[i].impoeLimites(0,0, tela.width, tela.height);
-        if(i > 0 && pc.imunidade <=0 && pc.colidiuCom(sprites[i])){
+        if(i > 0 && i<3 && pc.imunidade <=0 && pc.colidiuCom(sprites[i])){
           pc.cor = 'red';
           pc.x = 0;
           pc.y = 0;
@@ -74,7 +78,22 @@
           break;
         case 40:
           pc.acel = -200;
-          break;m
+          break;
+        case 32:
+        if(pc.cdTiro<=0){
+          console.log(pc.cdTiro);
+          var tiro = new Sprite();
+          tiro.x = pc.x;
+          tiro.y = pc.y;
+          tiro.w = 5;
+          tiro.h = 5;
+          tiro.ang = pc.ang;
+          tiro.cor = 'red';
+          tiro.acel = 500;
+          sprites.push(tiro);
+          pc.cdTiro = 3;
+        }
+        break;
         default:
       }
     });
